@@ -1,0 +1,119 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HelloWorld</title>
+</head>
+<body>
+<p>Apple</p>
+<p id = "mm">Pear</p>
+<p>Banana</p>
+<!--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>-->
+<script src="js/d3.js" charset="utf-8"></script>
+<script>
+  /////// test -4 ///
+  /*str = "China";
+  var body=d3.select("body");
+  var p = body.selectAll("p");
+  p.datum(str);
+  p.text(function(d, i){
+      return "第 "+ i + " 个元素绑定的数据是 " + d;
+  })*/
+
+  /*var dataset = ["I like dogs","I like cats","I like snakes"];
+  var body = d3.select("body");
+  var p = body.selectAll("p");
+
+  p.data(dataset)
+    .text(function(d, i){
+      return d;
+    });*/
+  /*var b = d3.select("body")
+  var p1 = b.select("p");
+  p1.style("color","red");
+  b.append("p").text("123123123")
+  b.insert("p","#mm").text("shangshandalaohu")
+  var p2 = b.select("#mm")
+  p2.remove()*/
+/*
+  ////////test-5////////////
+  var width = 300;  //画布的宽度
+  var height = 300;   //画布的高度
+
+  var svg = d3.select("body")     //选择文档中的body元素
+  .append("svg")          //添加一个svg元素
+    .attr("width", width)       //设定宽度
+    .attr("height", height);    //设定高度
+
+  var dataset = [ 1.2 , 1.3 , 1 , 0.4 , 0.9 ];  //数据（表示矩形的宽度)
+
+  var min = d3.min(dataset);
+  var max = d3.max(dataset);
+  //var linear = d3.scale().scaleLinear().domain([min,max]).range([0,300]);
+  var linear = d3.scale.linear().domain([min,max]).range([0, 300]);
+
+
+  var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
+
+
+  //有数据，而没有足够图形元素的时候，使用此方法可以添加足够的元素。
+  svg.selectAll("rect")
+    .data(dataset) //绑定dataset
+    .enter()
+    .append("rect")
+    .attr("x",20)
+    .attr("y",function(d,i){
+      return i * rectHeight;
+    })
+    .attr("width",function(d){
+      return 100;
+    })
+    .attr("height",rectHeight-2)
+    .attr("fill","steelblue");
+*/
+
+
+
+  var width = 300;	//画布的宽度
+  var height = 300;	//画布的高度
+
+  document.write("scaleLinear(1)输出：12123123123");
+
+  var svg = d3.select("body")				//选择文档中的body元素
+    .append("svg")				//添加一个svg元素
+    .attr("width", width)		//设定宽度
+    .attr("height", height);	//设定高度
+
+  var dataset = [ 2.5 , 2.1 , 1.7 , 1.3 , 0.9 ];
+
+  var linear = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, 250]);
+
+  var axis = d3.axisBottom(linear).ticks(7);
+
+  var rectHeight = 25;	//每个矩形所占的像素高度(包括空白)
+
+  svg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("x",20)
+    .attr("y",function(d,i){
+      return i * rectHeight;
+    })
+    .attr("width",function(d){
+      return linear(d);
+    })
+    .attr("height",rectHeight-2)
+    .attr("fill","steelblue");
+
+  svg.append("g")
+    .attr("transform","translate("+20+","+(dataset.length*rectHeight)+")")
+    .call(axis);
+
+
+
+
+</script>
+</body>
+</html>
